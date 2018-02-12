@@ -1,0 +1,16 @@
+﻿@model CurrentWeatherDemo.Models.WeatherModel
+
+@if (Model != null)
+{
+    if (Model.TemperatureCelsius.HasValue)
+    {
+        <p>Temperature: @(Model.TemperatureCelsius.Value)°C / @(Model.TemperatureFahrenheit.Value)°F</p>
+    }
+
+    <p>Condition: @Model.Status</p>
+
+    foreach (var icon in Model.Icons)
+    {
+        <img src="@icon" />
+    }
+}

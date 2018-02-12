@@ -1,0 +1,67 @@
+﻿@{
+    Page.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <button id="btn-get-weather" class="btn btn-default">Get current weather</button>
+        <p id="error-message" class="alert-danger"></p>
+    </div>
+    <div class="col-md-8">
+        <h3>Current weather</h3>
+        <div id="weather-container" class="col-md-4">
+            @{
+                Html.RenderPartial("_WeatherView");
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        checkGeolocation();
+        $("#btn-get-weather").click(getWeather);
+    });
+
+    // Check if Geolocation is supported by the browser
+    function checkGeolocation() {
+        showError("");
+
+        var result = navigator.geolocation | true;
+        if (!result) {
+            showError("Geolocation is not supported by your browser");
+        }
+
+        return result;
+    }
+
+    function getWeather() {
+        if (checkGeolocation()) {
+            // Get current location
+            navigator.geolocation.getCurrentPosition(setLocation, showError);
+        }
+    }
+
+    function setLocation(location) {
+        // Call for the weather status
+        getCurrentWeather(location.coords.latitude, location.coords.longitude);
+    }
+
+    // Get current weather of the location
+    function getCurrentWeather(latitude, longitude) {
+        $("#weather-container").load("@Url.Action("GetCurrentWeather")" + "?latitude=" + latitude + "&longitude=" + longitude,
+            function (response, status, xhr) {
+                if (status == "error") {
+                    showError(xhr.status + ": " + xhr.statusText);
+                }
+            }
+        );
+    }
+
+    // Show error message
+    function showError(err) {
+        $("#error-message").text(err.message || err);
+    }
+
+</script>
