@@ -2,7 +2,7 @@
 Just a demo demonstrating how to implement sample weather condition check
 
 How to get:
-Run the following command
+Run the following command:
 git clone https://github.com/sergeiborisov/CurrentWeatherDemo.git
 
 How to run:
