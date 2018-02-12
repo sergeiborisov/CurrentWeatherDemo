@@ -15,3 +15,5 @@ Comments: UI is very simple but can be easily extended. The solution contains th
 ![Initial page state](Screenshots/CurrentWeatherScreenshot1.png "Initial page state")
 
 ![Page state after the button click](Screenshots/CurrentWeatherScreenshot2.png "Page state after the button click")
+
+![Unit test complete screen](Screenshots/UnitTestsScreenshot.png "Unit test complete screen")
